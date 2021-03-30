@@ -17,6 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 @Service
 public class TemplateServiceImpl implements TemplateService {
 
@@ -69,6 +74,14 @@ public class TemplateServiceImpl implements TemplateService {
             }
         });
         return message;
+    }
+
+    @Override
+    public List<String> getVariables(String templateId) {
+        Template template = templateRepository.findById(templateId)
+                .orElseThrow(() -> new RuntimeException("Шаблон не найден"));
+        Matcher matcher = Pattern.compile("\\$\\w+\\$").matcher(template.getPattern());
+        return matcher.results().map(e -> e.group().replace("$", "")).collect(Collectors.toList());
     }
 
     @Scheduled(cron = "${cron.expression}")

@@ -8,6 +8,8 @@ import com.github.un1imited41.internship.services.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("template")
 @CrossOrigin("*")
@@ -24,6 +26,11 @@ public class TemplateController {
     @PostMapping("send-message")
     public void send(@RequestBody VariableWrapper variable) {
         templateService.saveVariables(variable);
+    }
+
+    @GetMapping("{id}/get-variables")
+    public List<String> getVariables(@PathVariable("id") String templateId) {
+        return templateService.getVariables(templateId);
     }
 
 }

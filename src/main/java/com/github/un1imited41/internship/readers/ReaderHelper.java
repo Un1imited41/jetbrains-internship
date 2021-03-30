@@ -70,7 +70,6 @@ public class ReaderHelper {
                 findEntity(joins, field).ifPresent(path ->
                         bindings.put(field.getName(), Projections.bean(field.getType(),
                                 getBindings(field.getType(), path, joins))));
-
             }
         }
         return bindings;

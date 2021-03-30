@@ -25,10 +25,6 @@ public class VariableReader {
     private static final QTemplate template = QTemplate.template;
     private static final QVariableWrapper variable = QVariableWrapper.variableWrapper;
 
-    public List<VariableWrapperDto> test() {
-        return readerHelper.selectDto(VariableWrapperDto.class, variableQuery());
-    }
-
     public VariableWrapperDto getVariableById(Long id) {
         return readerHelper.selectDto(VariableWrapperDto.class,
                 variableQuery().where(variable.id.eq(id))).stream().findFirst().get();

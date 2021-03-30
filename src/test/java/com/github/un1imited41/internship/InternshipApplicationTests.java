@@ -43,7 +43,7 @@ class InternshipApplicationTests {
     void testSendMessage() throws Exception {
         mvc.perform(post("/template/send-message")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"templateId\": \"recipients\",\"variables\": [{\"teamName\": \"Analytics Platform\"}]}"))
+                .content("{\"templateId\": \"testTemplate\",\"variables\": [{\"teamName\": \"Analytics Platform\"}]}"))
                 .andDo(print()).andExpect(status().isOk())
                 .andReturn();
     }
